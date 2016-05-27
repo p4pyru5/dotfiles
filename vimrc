@@ -31,8 +31,8 @@ filetype indent on
 
 set backspace=2   " Backspace deletes like most programs in insert mode
 set nocompatible  " Use Vim settings, rather then Vi settings
-"set nobackup
-"set nowritebackup
+set nobackup
+set nowritebackup
 set noswapfile    " http://robots.thoughtbot.com/post/18739402579/global-gitignore#comment-458413287
 set ruler         " show the cursor position all the time
 set showcmd       " display incomplete commands
@@ -42,6 +42,9 @@ set laststatus=2  " Always display the status line
 set autowrite     " Automatically :write before running commands
 
 
+" Display extra whitespace
+"set list listchars=tab:»\ ,trail:·,eol:¬
+set list listchars=tab:▸\ ,trail:·
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -72,14 +75,6 @@ if (&t_Co > 2 || has("gui_running")) && !exists("syntax_on")
 endif
 
 
-" Airline status bar. Wichtig pacman -Sy powerline-fonts
-let g:airline_powerline_fonts = 1
-if !exists('g:airline_symbols')
-    let g:airline_symbols = {}
-endif
-let g:airline_symbols.space = "\ua0"
-let g:airline_theme='solarized'
-
 
 set t_Co=256
 
@@ -97,7 +92,7 @@ hi CursorLineNr guifg=#050505
 
 " Numbers
 set number
-set numberwidth=4
+set numberwidth=5
 
 
 set encoding=utf-8
@@ -138,10 +133,9 @@ endfunction
 inoremap <Tab> <c-r>=InsertTabWrapper()<cr>
 
 
-" Softtabs, 2 spaces
 set tabstop=4
 set shiftwidth=4
-set expandtab
+"set expandtab
 
 
 
@@ -159,6 +153,16 @@ set expandtab
 """"""""""""""""""""""""""""""
 " => Status line
 """"""""""""""""""""""""""""""
+
+
+" Airline status bar. Wichtig pacman -Sy powerline-fonts
+let g:airline_powerline_fonts = 1
+if !exists('g:airline_symbols')
+    let g:airline_symbols = {}
+endif
+let g:airline_symbols.space = "\ua0"
+let g:airline_theme='solarized'
+let g:airline_solarized_bg='dark'
 
 
 
@@ -188,5 +192,43 @@ set expandtab
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Helper functions
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Plugins
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+
+""""""""""""""""""""""
+" => Nerdtree
+""""""""""""""""""""""
+
+" close NERDTree after a file is opened
+let g:NERDTreeQuitOnOpen=1
+" show hidden files in NERDTree
+let NERDTreeShowHidden=1
+" remove some files by extension
+let NERDTreeIgnore = ['\.js.map$']
+" Toggle NERDTree
+nmap <silent> <leader>k :NERDTreeToggle<cr>
+" expand to the path of the file in the current buffer
+nmap <silent> <leader>y :NERDTreeFind<cr>
+
+
+""""""""""""""""""""""
+" => Syntastic syntax checker
+""""""""""""""""""""""
+" recommended settings from their github page
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+"let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+
+let g:syntastic_enable_highlighting=0
 
 
