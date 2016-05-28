@@ -25,9 +25,12 @@ set history=700
 filetype plugin on
 filetype indent on
 
-
+set ttyfast
+set lazyredraw
 
 :au FocusLost * :wa "Save on focus lost
+
+
 
 set backspace=2   " Backspace deletes like most programs in insert mode
 set nocompatible  " Use Vim settings, rather then Vi settings
@@ -47,6 +50,11 @@ set autowrite     " Automatically :write before running commands
 set list listchars=tab:▸\ ,trail:·
 
 
+
+" disable Ex mode
+noremap Q <NOP>
+
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => VIM user interface
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -62,6 +70,12 @@ set list listchars=tab:▸\ ,trail:·
 " Open new split panes to right and bottom, which feels more natural
 set splitbelow
 set splitright
+
+
+" Reduce timeout after <ESC> is recvd. This is only a good idea on fast links.
+set ttimeout
+set ttimeoutlen=20
+set notimeout
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -95,6 +109,14 @@ set number
 set numberwidth=5
 
 
+set wrap "turn on line wrapping
+set wrapmargin=8 " wrap lines when coming within n characters from side
+set linebreak " set soft wrapping
+" set showbreak=… " show ellipsis at breaking
+
+set showbreak=¬ " show ellipsis at breaking
+
+
 set encoding=utf-8
 
 " Use Unix as the standard file type
@@ -102,7 +124,7 @@ set ffs=unix,dos,mac
 
 
 
-    
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Files, backups and undo
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -132,11 +154,14 @@ function! InsertTabWrapper()
 endfunction
 inoremap <Tab> <c-r>=InsertTabWrapper()<cr>
 
-
-set tabstop=4
-set shiftwidth=4
-"set expandtab
-
+" Tab control
+set noexpandtab " insert tabs rather than spaces for <Tab>
+set smarttab " tab respects 'tabstop', 'shiftwidth', and 'softtabstop'
+set tabstop=4 " the visible width of tabs
+set softtabstop=4 " edit as if the tabs are 4 characters wide
+set shiftwidth=4 " number of spaces to use for indent and unindent
+set shiftround " round indent to a multiple of 'shiftwidth'
+set completeopt+=longest
 
 
 """"""""""""""""""""""""""""""
@@ -147,6 +172,52 @@ set shiftwidth=4
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Moving around, tabs, windows and buffers
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" scho opend buffers and let choose one
+nnoremap <leader>l :ls<CR>:b<Space>
+
+
+
+
+
+function! NumberToggle()
+  if(&relativenumber == 1)
+    set norelativenumber
+  else
+    set relativenumber
+  endif
+endfunc
+
+" Toggle relative/absolut Line numbering
+nnoremap <C-n> :call NumberToggle()<cr>
+
+
+" on focus lost, set to absolute
+:au FocusLost * :set number
+" :au FocusGained * :set relativenumber
+
+
+
+
+" Im insertmode werden immer absolute Zeilennnummern gezeigt.
+" Wird vom insert mode zum normal mode zurück gewechselt, wird
+" automatisch wieder die Einstellung vor dem insert hergestellt.
+"
+let g:myvar=0
+function! InsertModeNumbersRelativeOrAbsolute( entry )
+	if a:entry == "entry"
+		let g:myvar = &relativenumber
+		set norelativenumber
+	else
+		if g:myvar == 1
+			set relativenumber
+		endif
+	endif
+endfunc
+
+" Immer absolute Zeilenangaben im insert-mode
+:au InsertEnter * :call InsertModeNumbersRelativeOrAbsolute("entry")
+:au InsertLeave * :call InsertModeNumbersRelativeOrAbsolute("leave")
 
 
 
@@ -215,6 +286,26 @@ nmap <silent> <leader>k :NERDTreeToggle<cr>
 " expand to the path of the file in the current buffer
 nmap <silent> <leader>y :NERDTreeFind<cr>
 
+" default arrows
+let g:NERDTreeDirArrowExpandable = '▸'
+let g:NERDTreeDirArrowCollapsible = '▾'
+
+
+""""""""""""""""""""""
+" => Nerdtree Git Plugin
+""""""""""""""""""""""
+
+let g:NERDTreeIndicatorMapCustom = {
+    \ "Modified"  : "✹",
+    \ "Staged"    : "✚",
+    \ "Untracked" : "✭",
+    \ "Renamed"   : "➜",
+    \ "Unmerged"  : "═",
+    \ "Deleted"   : "✖",
+    \ "Dirty"     : "✗",
+    \ "Clean"     : "✔︎",
+    \ "Unknown"   : "?"
+    \ }
 
 """"""""""""""""""""""
 " => Syntastic syntax checker
@@ -231,4 +322,15 @@ let g:syntastic_check_on_wq = 0
 
 let g:syntastic_enable_highlighting=0
 
+""""""""""""""""""""""
+" => Auto Formatter
+" https://github.com/Chiel92/vim-autoformat
+""""""""""""""""""""""
+noremap <F3> :Autoformat<CR>
+" Disable fallback
+let g:autoformat_autoindent = 0
+let g:autoformat_retab = 0
+let g:autoformat_remove_trailing_spaces = 0
 
+let g:formatdef_my_custom_c = '"astyle --options=${HOME}/.astylerc ".(&expandtab ? "-s".shiftwidth() : "-t")'
+let g:formatters_c = ['my_custom_c']
