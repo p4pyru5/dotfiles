@@ -304,23 +304,24 @@ elseif g:solarized_termcolors == 256
 	
     if &background == "dark"
     
-		let s:base03      = "234"	" Background Tone Dark	(default: 234)
+		let s:base03      = "233"	" Background Tone Dark	(default: 234)
 		let s:base02      = "235"	" Background Tone Dark - Seitenleiste (Zeilennummern) (default: 235)
-		let s:base01      = "242"	" Content - Zeilennummern und Kommentare (default: 239)
+		let s:base01      = "243"	" Content - Zeilennummern und Kommentare (default: 239)
 		let s:base00      = "245"	" Content - (default: 240)
 		let s:base0       = "252"	" Content - Text (default: 244)
 		let s:base1       = "245"	" Content - Statusleiste
 		let s:base2       = "187"	" Background Tone Light
 		let s:base3       = "230"	" Background Tone Light
-		let s:yellow      = "136"	" default: 136
+		let s:yellow      = "178"	" default: 136
 		let s:orange      = "166"	" default: 166
 		let s:red         = "124"	" default: 124
 		let s:magenta     = "125"	" default: 125
 		let s:violet      = "61"	" default: 61
 		let s:blue        = "33"	" default: 33
 		let s:cyan        = "37"	" default: 37
-		let s:green       = "70"	" default: 64
+		let s:green       = "71"	" default: 64
     
+
     else
     
     	let s:base03      = "230"	" Background Tone
@@ -579,6 +580,7 @@ endif
 " note that link syntax to avoid duplicate configuration doesn't work with the
 " exe compiled formats
 
+"exe "hi! Normal"         .s:fmt_none   .s:fg_base0  .s:bg_back
 exe "hi! Normal"         .s:fmt_none   .s:fg_base0  .s:bg_back
 
 exe "hi! Comment"        .s:fmt_ital   .s:fg_base01 .s:bg_none
@@ -632,7 +634,7 @@ exe "hi! Underlined"     .s:fmt_none   .s:fg_violet .s:bg_none
 exe "hi! Ignore"         .s:fmt_none   .s:fg_none   .s:bg_none
 "       *Ignore          left blank, hidden  |hl-Ignore|
 
-exe "hi! Error"          .s:fmt_bold   .s:fg_red    .s:bg_none
+exe "hi! Error"          .s:fmt_bold   .s:fg_red    .s:bg_base02
 "       *Error           any erroneous construct
 
 exe "hi! Todo"           .s:fmt_bold   .s:fg_magenta.s:bg_none
@@ -649,7 +651,7 @@ elseif  (g:solarized_visibility=="low")
     exe "hi! SpecialKey" .s:fmt_bold   .s:fg_base02 .s:bg_none
     exe "hi! NonText"    .s:fmt_bold   .s:fg_base02 .s:bg_none
 else
-    exe "hi! SpecialKey" .s:fmt_bold   .s:fg_base00 .s:bg_base02
+    exe "hi! SpecialKey" .s:fmt_bold   .s:fg_base00 .s:bg_none
     exe "hi! NonText"    .s:fmt_bold   .s:fg_base00 .s:bg_none
 endif
 exe "hi! StatusLine"     .s:fmt_none   .s:fg_base1  .s:bg_base02 .s:fmt_revbb
@@ -662,6 +664,9 @@ exe "hi! Search"         .s:fmt_revr   .s:fg_yellow .s:bg_none
 exe "hi! MoreMsg"        .s:fmt_none   .s:fg_blue   .s:bg_none
 exe "hi! ModeMsg"        .s:fmt_none   .s:fg_blue   .s:bg_none
 exe "hi! LineNr"         .s:fmt_none   .s:fg_base01 .s:bg_base02
+
+exe "hi! CursorLineNr"   .s:fmt_bold   .s:fg_base2  .s:bg_base02
+
 exe "hi! Question"       .s:fmt_bold   .s:fg_cyan   .s:bg_none
 if ( has("gui_running") || &t_Co > 8 )
     exe "hi! VertSplit"  .s:fmt_none   .s:fg_base00 .s:bg_base00
@@ -697,7 +702,7 @@ exe "hi! DiffDelete"     .s:fmt_none   .s:fg_red    .s:bg_base02
 exe "hi! DiffText"       .s:fmt_none   .s:fg_blue   .s:bg_base02 .s:sp_blue
     endif
 endif
-exe "hi! SignColumn"     .s:fmt_none   .s:fg_base0
+exe "hi! SignColumn"     .s:fmt_none   .s:fg_base0  .s:bg_base02
 exe "hi! Conceal"        .s:fmt_none   .s:fg_blue   .s:bg_none
 exe "hi! SpellBad"       .s:fmt_curl   .s:fg_none   .s:bg_none    .s:sp_red
 exe "hi! SpellCap"       .s:fmt_curl   .s:fg_none   .s:bg_none    .s:sp_violet

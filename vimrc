@@ -18,6 +18,8 @@ endif
 " => General
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
+set modelines=0
+
 " Sets how many lines of history VIM has to remember
 set history=700
 
@@ -61,10 +63,10 @@ noremap Q <NOP>
 
 
 " Get off my lawn
-"nnoremap <Left> :echoe "Use h"<CR>
-"nnoremap <Right> :echoe "Use l"<CR>
-"nnoremap <Up> :echoe "Use k"<CR>
-"nnoremap <Down> :echoe "Use j"<CR>
+" nnoremap <Left> :echoe "Use h"<CR>
+" nnoremap <Right> :echoe "Use l"<CR>
+" nnoremap <Up> :echoe "Use k"<CR>
+" nnoremap <Down> :echoe "Use j"<CR>
 
 
 " Open new split panes to right and bottom, which feels more natural
@@ -101,20 +103,21 @@ let g:solarized_termcolors=256
 " Color scheme
 set background=dark
 colorscheme solarized
-" Highlight line number of where cursor currently is
-hi CursorLineNr guifg=#050505
+
+" highlight current line
+set cursorline
+
 
 " Numbers
 set number
-set numberwidth=5
+set numberwidth=4
 
 
 set wrap "turn on line wrapping
 set wrapmargin=8 " wrap lines when coming within n characters from side
 set linebreak " set soft wrapping
-" set showbreak=… " show ellipsis at breaking
-
-set showbreak=¬ " show ellipsis at breaking
+set showbreak=… " show ellipsis at breaking
+"set showbreak=¬ " show ellipsis at breaking
 
 
 set encoding=utf-8
@@ -178,6 +181,8 @@ nnoremap <leader>l :ls<CR>:b<Space>
 
 
 
+set relativenumber
+
 
 
 function! NumberToggle()
@@ -203,13 +208,13 @@ nnoremap <C-n> :call NumberToggle()<cr>
 " Wird vom insert mode zum normal mode zurück gewechselt, wird
 " automatisch wieder die Einstellung vor dem insert hergestellt.
 "
-let g:myvar=0
+let g:isRelativeNumbering=&relativenumber
 function! InsertModeNumbersRelativeOrAbsolute( entry )
 	if a:entry == "entry"
-		let g:myvar = &relativenumber
+		let g:isRelativeNumbering = &relativenumber
 		set norelativenumber
 	else
-		if g:myvar == 1
+		if g:isRelativeNumbering == 1
 			set relativenumber
 		endif
 	endif
@@ -258,6 +263,14 @@ let g:airline_solarized_bg='dark'
 " => Misc
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
+" Aus Kompatibilitaet zu tmux wird C-a umgemappt.
+" In tmux ist bei mir C-a der prefix
+:nnoremap <leader>a <C-a>
+:nnoremap <A-x> <C-x>
+
+
+" So wird immer in das X11-Clipboard kopiert
+set clipboard=unnamedplus
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -291,9 +304,9 @@ let g:NERDTreeDirArrowExpandable = '▸'
 let g:NERDTreeDirArrowCollapsible = '▾'
 
 
-""""""""""""""""""""""
+" -------------------------------------------
 " => Nerdtree Git Plugin
-""""""""""""""""""""""
+" -------------------------------------------
 
 let g:NERDTreeIndicatorMapCustom = {
     \ "Modified"  : "✹",
@@ -307,9 +320,9 @@ let g:NERDTreeIndicatorMapCustom = {
     \ "Unknown"   : "?"
     \ }
 
-""""""""""""""""""""""
+" -------------------------------------------
 " => Syntastic syntax checker
-""""""""""""""""""""""
+" -------------------------------------------
 " recommended settings from their github page
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
@@ -322,15 +335,80 @@ let g:syntastic_check_on_wq = 0
 
 let g:syntastic_enable_highlighting=0
 
-""""""""""""""""""""""
+" -------------------------------------------
 " => Auto Formatter
 " https://github.com/Chiel92/vim-autoformat
-""""""""""""""""""""""
+" -------------------------------------------
 noremap <F3> :Autoformat<CR>
 " Disable fallback
 let g:autoformat_autoindent = 0
 let g:autoformat_retab = 0
-let g:autoformat_remove_trailing_spaces = 0
+let g:autoformat_remove_trailing_spaces = 1
 
 let g:formatdef_my_custom_c = '"astyle --options=${HOME}/.astylerc ".(&expandtab ? "-s".shiftwidth() : "-t")'
 let g:formatters_c = ['my_custom_c']
+
+
+
+
+" -------------------------------------------
+" vimux
+" -------------------------------------------
+" let g:VimuxOrientation = 'v'
+" let g:VimuxUseNearestPane = 0
+" Inspect runner pane map
+nmap <Leader>vi :VimuxInspectRunner<CR>
+nmap <leader>vp :VimuxPromptCommand<cr>
+nmap <leader>vl :VimuxRunLastCommand<cr>
+nmap <leader>vq :VimuxCloseRunner<cr>
+" The percent of the screen the split pane Vimux will spawn should take up.
+let g:VimuxHeight = "25"
+" Vimux should only open a pane when there isn't one already
+let g:VimuxUseNearestPane = 1
+" The keys sent to the runner pane before running a command. By default it sends
+" `q` to make sure the pane is not in scroll-mode and `C-u` to clear the line.
+" let g:VimuxResetSequence = 'q C-l C-u'
+
+
+
+
+
+
+
+" -------------------------------------------
+" CtrlP file search
+" -------------------------------------------
+let g:ctrlp_buffer_func = { 'enter': 'BrightHighlightOn', 'exit':  'BrightHighlightOff', }
+
+
+function BrightHighlightOn()
+  hi CursorLine ctermbg=100
+endfunction
+
+function BrightHighlightOff()
+  hi CursorLine ctermbg=235
+endfunction
+
+
+
+
+" -------------------------------------------
+" AG Silver searcher
+" -------------------------------------------
+" bind K to search word under cursor
+nnoremap K :Ag "\b<C-R><C-W>\b"<CR>:cw<CR>
+
+
+
+
+
+set ruler
+
+if !&scrolloff
+  set scrolloff=1
+endif
+if !&sidescrolloff
+  set sidescrolloff=5
+endif
+set display+=lastline
+
