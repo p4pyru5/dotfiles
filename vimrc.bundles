@@ -24,14 +24,23 @@ Plugin 'vim-airline/vim-airline-themes'	" ... themes
 Plugin 'scrooloose/nerdtree'			" File browser inside vim
 Plugin 'Xuyuanp/nerdtree-git-plugin'	" show in nerdtree git symbols for file state
  
-Plugin 'scrooloose/syntastic'			" very cool syntax checker
+Plugin 'scrooloose/syntastic'			" syntax checker
 Plugin 'tpope/vim-fugitive'				" GIT Plugin
 Plugin 'benmills/vimux' 				" tmux integration for vim
 Plugin 'Chiel92/vim-autoformat'
 Plugin 'ctrlpvim/ctrlp.vim'				" Fuzzy File Finder
 Plugin 'rking/ag.vim'					" AG - silver searcher
 
-"Plugin 'lervag/vimtex'					
+Plugin 'lervag/vimtex'					
+Plugin 'gi1242/vim-tex-autoclose'		" Close last opend environment !!! gar nicht nötig, da vimtex das mit ]] macht? Prüfen!
+
+Plugin 'christoomey/vim-system-copy'	" eigner Befehl um in die Zwischenablage des Systems zu kopieren/von einzufügen
+
+Plugin 'Shougo/neocomplete'
+Plugin 'Shougo/neosnippet'
+Plugin 'Shougo/neosnippet-snippets'
+
+
 Plugin 'jlanzarotta/bufexplorer'
 
 

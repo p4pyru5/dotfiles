@@ -96,9 +96,9 @@ set t_Co=256
 
 let g:solarized_termcolors=256
 
-:set smartcase
-:set ignorecase
-:set noantialias
+set smartcase
+set ignorecase
+" set noantialias
 
 " Color scheme
 set background=dark
@@ -177,13 +177,11 @@ set completeopt+=longest
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " scho opend buffers and let choose one
-nnoremap <leader>l :ls<CR>:b<Space>
+nnoremap <leader>lb :ls<CR>:b<Space>
 
 
-
+" -------------------------------
 set relativenumber
-
-
 
 function! NumberToggle()
   if(&relativenumber == 1)
@@ -203,7 +201,7 @@ nnoremap <C-n> :call NumberToggle()<cr>
 
 
 
-
+" -------------------------------
 " Im insertmode werden immer absolute Zeilennnummern gezeigt.
 " Wird vom insert mode zum normal mode zurück gewechselt, wird
 " automatisch wieder die Einstellung vor dem insert hergestellt.
@@ -223,6 +221,17 @@ endfunc
 " Immer absolute Zeilenangaben im insert-mode
 :au InsertEnter * :call InsertModeNumbersRelativeOrAbsolute("entry")
 :au InsertLeave * :call InsertModeNumbersRelativeOrAbsolute("leave")
+
+
+" -------------------------------
+" Always show one line below/above when scrolling
+if !&scrolloff
+  set scrolloff=1
+endif
+if !&sidescrolloff
+  set sidescrolloff=5
+endif
+set display+=lastline
 
 
 
@@ -270,8 +279,9 @@ let g:airline_solarized_bg='dark'
 
 
 " So wird immer in das X11-Clipboard kopiert
-set clipboard=unnamedplus
+" dafür gibts jetzt system-copy.vim   set clipboard+=unnamedplus
 
+" let g:system_copy#paste_command='xsel -o'
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Helper functions
@@ -400,15 +410,10 @@ nnoremap K :Ag "\b<C-R><C-W>\b"<CR>:cw<CR>
 
 
 
+let g:Tex_CompileRule_pdf = 'pdflatex --interaction=nonstopmode $*'
+let g:Tex_DefaultTargetFormat = 'pdf'
 
 
-set ruler
 
-if !&scrolloff
-  set scrolloff=1
-endif
-if !&sidescrolloff
-  set sidescrolloff=5
-endif
-set display+=lastline
 
+imap <C-k> :<Plug>(neosnippet_expand_or_jump)
