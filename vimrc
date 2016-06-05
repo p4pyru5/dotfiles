@@ -120,6 +120,8 @@ set showbreak=… " show ellipsis at breaking
 "set showbreak=¬ " show ellipsis at breaking
 
 
+
+
 set encoding=utf-8
 
 " Use Unix as the standard file type
