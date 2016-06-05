@@ -21,12 +21,15 @@ if g:solarized_termcolors == 256
     
 		let s:base03      = "233"	" Background Tone Dark	(default: 234)
 		let s:base02      = "235"	" Background Tone Dark - Seitenleiste (Zeilennummern) (default: 235)
+		
 		let s:base01      = "243"	" Content - Zeilennummern und Kommentare (default: 239)
 		let s:base00      = "245"	" Content - (default: 240)
 		let s:base0       = "252"	" Content - Text (default: 244)
 		let s:base1       = "245"	" Content - Statusleiste
+		
 		let s:base2       = "187"	" Background Tone Light
 		let s:base3       = "230"	" Background Tone Light
+		
 		let s:yellow      = "178"	" default: 136
 		let s:orange      = "166"	" default: 166
 		let s:red         = "124"	" default: 124
@@ -57,8 +60,15 @@ if g:solarized_termcolors == 256
 		let s:blue        = "19"	" default: 33
 		let s:cyan        = "25"	" default: 37
 		let s:green       = "28"	" default: 64
+
+
+
+    	let s:base03      = "15"	" Background Tone
+		let s:base02      = "7"		" Background Tone - Seitenleiste (Zeilennummern)
 		
-		let s:back        = s:base02
+		
+		"let s:back        = s:base03
+		let s:back        = "NONE"
     
     endif
     
@@ -422,6 +432,6 @@ hi! link diffLine Identifier
 
 " CtrlP highlighting "{{{
 " ---------------------------------------------------------------------
-"	"hi link CtrlPLinePre Type
-"	"exe "hi! CtrlPPrtCursor"   . s:fg_base1  .s:bg_yellow
+	exe "hi! CtrlPLinePre"   . s:fg_yellow  .s:bg_none
+	"hi CtrlPLinePre
 "}}}

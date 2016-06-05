@@ -24,16 +24,7 @@ createLink "$HOME/dotfiles/zsh/zshrc" "$HOME/.zshrc"
 
 createLink "$HOME/dotfiles/tmux/tmux.conf" "$HOME/.tmux.conf"
 
-
-# ln -s $DOTFILESROOT/tmux/tmux.conf $HOME/.tmux.conf
-
-# ln -s $DOTFILESROOT/zsh/zshrc $HOME/.zshrc
-
-
-# mkdir -p $HOME/.config/nvim
-# ln -s $DOTFILESROOT/nvim/ $HOME/.config/nvim/
-
-
+createLink "$HOME/dotfiles/nvim" "$HOME/.config/nvim"
 
 
 
@@ -46,3 +37,7 @@ createLink "$HOME/dotfiles/tmux/tmux.conf" "$HOME/.tmux.conf"
 
 
 exit 0;
+
+
+
+

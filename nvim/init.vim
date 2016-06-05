@@ -67,16 +67,22 @@ Plug 'easymotion/vim-easymotion'
 
 
 
-" function! DoRemote(arg)
-  " UpdateRemotePlugins
-" endfunction
-" Plug 'Shougo/deoplete.nvim', { 'do': function('DoRemote') }
+function! DoRemote(arg)
+  UpdateRemotePlugins
+endfunction
+Plug 'Shougo/deoplete.nvim', { 'do': function('DoRemote') }
+Plug 'Shougo/neco-syntax'	" Use syntax file for completion
 
-Plug 'sirver/ultisnips'
+Plug 'Shougo/neosnippet'	" Snippets
+Plug 'Shougo/neosnippet-snippets'
 
-Plug 'honza/vim-snippets'
 
-Plug 'Shougo/neocomplete.vim'
+" Plug 'Shougo/neocomplete.vim'
+
+"Plug 'sirver/ultisnips'
+
+"Plug 'honza/vim-snippets'
+
 
 Plug 'justmao945/vim-clang'
 
@@ -194,6 +200,7 @@ execute "set background=".BACKGROUND
 "colorscheme solarized
 colorscheme stephan
 "colorscheme Tomorrow-Night-Eighties
+"colorscheme Tomorrow
 
 
 
@@ -343,8 +350,8 @@ set splitright
 
 
 " Use tab to jump between blocks, because it's easier
-nnoremap <tab> %
-vnoremap <tab> %
+" nnoremap <tab> %
+" vnoremap <tab> %
 
 
 
@@ -355,8 +362,9 @@ vnoremap <silent> <C-S>         <C-C>:update<CR>
 inoremap <silent> <C-S>         <C-O>:update<CR>
 
 
-
-
+" Command completion
+set wildmode=list:longest,list:full
+set complete=.,w,t
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -428,8 +436,6 @@ map  N <Plug>(easymotion-prev)
 
 
 
-
-
 let g:neomake_splint_maker = {
         \ 'exe': 'splint',
         \ 'args': ['%:p'],
@@ -446,12 +452,12 @@ endif
 
 
 " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
-let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsJumpForwardTrigger="<c-b>"
-let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+" let g:UltiSnipsExpandTrigger="<tab>"
+" let g:UltiSnipsJumpForwardTrigger="<c-b>"
+" let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 
 " If you want :UltiSnipsEdit to split your window.
-let g:UltiSnipsEditSplit="vertical"
+" let g:UltiSnipsEditSplit="vertical"
 
 
 
@@ -548,7 +554,7 @@ nnoremap K :Ag "\b<C-R><C-W>\b"<CR>:cw<CR>
 " http://stackoverflow.com/questions/27585722/is-it-possible-to-set-a-separate-color-scheme-for-the-popup-of-ctrlp-plugin
 " wird anscheinend irgendwo überschrieben
 
-hi CtrlPLinePre ctermfg=214 guibg=#262626 guifg=#bcbcbc cterm=NONE gui=NONE
+" hi CtrlPLinePre ctermfg=214 guibg=#262626 guifg=#bcbcbc cterm=NONE gui=NONE
 
 
 
@@ -574,6 +580,36 @@ nnoremap <leader><leader>y :<C-u>Unite -no-split -buffer-name=yank    history/ya
 "nnoremap <leader>o :<C-u>Unite -no-split -buffer-name=outline -start-insert outline<cr>
 "nnoremap <leader>y :<C-u>Unite -no-split -buffer-name=yank    history/yank<cr>
 "nnoremap <leader>e :<C-u>Unite -no-split -buffer-name=buffer  buffer<cr>
+
+
+
+" ---------------------------------------------------
+"  Completion with deoplete
+
+
+
+" deoplete
+let g:deoplete#enable_at_startup = 1
+
+
+
+
+
+" let g:neocomplete#sources#dictionary#dictionaries = {
+    " \'default' : '',
+    " \'text' :'mydict.txt', "your target dictionary"
+    " \}
+
+
+
+" Plugin key-mappings.
+imap <C-k>     <Plug>(neosnippet_expand_or_jump)
+smap <C-k>     <Plug>(neosnippet_expand_or_jump)
+xmap <C-k>     <Plug>(neosnippet_expand_target)
+
+
+" map <expr><TAB> neosnippet#expandable_or_jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+
 
 
 
