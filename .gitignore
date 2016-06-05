@@ -1,3 +1,4 @@
 vim/bundle/
 tmux/network_*.last
 vim/undo/
+nvim/plugged/
