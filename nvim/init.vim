@@ -544,10 +544,20 @@ let g:NERDTreeIndicatorMapCustom = {
 
 " -------------------------------------------
 " CtrlP fuzzyfinder file search
+"
+" IMPORTANT: for changing color of CtrlPLinePre, uncomment Line 1753 in
+" plugged/ctrlp.vim/autoload/ctrlp.vim (exe "hi CtrlPLinePre ...")
+"
 " -------------------------------------------
 " nmap <silent> <leader>t :CtrlP<cr>
 
 "nmap <silent> <leader>r :CtrlPBuffer<cr>
+
+
+let g:ctrlp_line_prefix = '⚪ '
+" let g:ctrlp_line_prefix = '➤ '
+" let g:ctrlp_line_prefix = '❱ '
+let g:ctrlp_line_prefix = '➔ '
 
 
 " Setup some default ignores
@@ -594,7 +604,7 @@ nnoremap K :Ag "\b<C-R><C-W>\b"<CR>:cw<CR>
 
 " hi CtrlPLinePre ctermfg=214 guibg=#262626 guifg=#bcbcbc cterm=NONE gui=NONE
 
-
+" hi CtrlPPrtCursor term=NONE cterm=NONE ctermbg=60
 
 
 

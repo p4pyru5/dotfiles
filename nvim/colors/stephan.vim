@@ -39,7 +39,8 @@ if g:solarized_termcolors == 256
 		let s:cyan        = "37"	" default: 37
 		let s:green       = "71"	" default: 64
     
-		let s:back        = "NONE"
+		let s:back        = "234"
+		"let s:back        = "NONE"
     else
     
     	let s:base03      = "230"	" Background Tone
@@ -67,8 +68,8 @@ if g:solarized_termcolors == 256
 		let s:base02      = "7"		" Background Tone - Seitenleiste (Zeilennummern)
 		
 		
-		"let s:back        = s:base03
-		let s:back        = "NONE"
+		let s:back        = s:base03
+		"let s:back        = "NONE"
     
     endif
     
@@ -307,11 +308,18 @@ exe "let s:fmt_revb     = ' ".s:vmode."=NONE".s:r.s:b.  " term=NONE".s:r.s:b."'"
 	exe "hi! TabLineFill"    .s:fmt_undr   .s:fg_base0  .s:bg_base02
 	exe "hi! TabLineSel"     .s:fmt_undr   .s:fg_base01 .s:bg_base2
 	exe "hi! CursorColumn"   .s:fmt_none   .s:fg_none   .s:bg_base02
-	exe "hi! CursorLine"     .s:fmt_uopt   .s:fg_none   .s:bg_base02
+	" exe "hi! CursorLine"     .s:fmt_uopt   .s:fg_none   .s:bg_base02
+	" exe "hi! ColorColumn"    .s:fmt_none   .s:fg_none   .s:bg_base02
+	" exe "hi! LineNr"         .s:fmt_none   .s:fg_base01 .s:bg_base02
+	" exe "hi! CursorLineNr"   .s:fmt_bold   .s:fg_base2  .s:bg_base02
+	" exe "hi! Cursor"         .s:fmt_none   .s:fg_base03 .s:bg_base0
+
+	exe "hi! CursorLine"     .s:fmt_uopt   .s:fg_none   ." ctermbg=236"
 	exe "hi! ColorColumn"    .s:fmt_none   .s:fg_none   .s:bg_base02
 	exe "hi! LineNr"         .s:fmt_none   .s:fg_base01 .s:bg_base02
-	exe "hi! CursorLineNr"   .s:fmt_bold   .s:fg_base2  .s:bg_base02
+	exe "hi! CursorLineNr"   .s:fmt_none   .s:fg_base2  ." ctermbg=238"
 	exe "hi! Cursor"         .s:fmt_none   .s:fg_base03 .s:bg_base0
+
 	hi! link lCursor Cursor
 	exe "hi! MatchParen"     .s:fmt_bold   .s:fg_red    .s:bg_base01
 "}}}
@@ -432,6 +440,5 @@ hi! link diffLine Identifier
 
 " CtrlP highlighting "{{{
 " ---------------------------------------------------------------------
-	exe "hi! CtrlPLinePre"   . s:fg_yellow  .s:bg_none
-	"hi CtrlPLinePre
+	exe "hi! CtrlPLinePre term=NONE cterm=NONE ctermbg=NONE ctermfg=136"
 "}}}
