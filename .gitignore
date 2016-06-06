@@ -3,3 +3,4 @@ tmux/network_*.last
 vim/undo/
 nvim/plugged/
 nvim/.init.vim-rplugin*
+nvim/.netrwhist

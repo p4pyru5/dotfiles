@@ -7,7 +7,7 @@ call plug#begin('~/.config/nvim/plugged')
 " Make sure you use single quotes
 
 " colorschemes
-Plug 'chriskempson/base16-vim'
+" Plug 'chriskempson/base16-vim'
 
 Plug 'vim-airline/vim-airline' " fancy statusline
 Plug 'vim-airline/vim-airline-themes' " themes for vim-airline
@@ -16,7 +16,7 @@ Plug 'vim-airline/vim-airline-themes' " themes for vim-airline
 Plug 'tpope/vim-sensible'		" a universal set of defaults that (hopefully) everyone can agree on
 
 " utilities
-Plug 'scrooloose/nerdtree', { 'on': ['NERDTreeToggle', 'NERDTreeFind'] } | Plug 'Xuyuanp/nerdtree-git-plugin' 		" file drawer
+Plug 'scrooloose/nerdtree', { 'on': ['NERDTree', 'NERDTreeToggle', 'NERDTreeFind'] } | Plug 'Xuyuanp/nerdtree-git-plugin' 		" file drawer
 Plug 'Raimondi/delimitMate' 	" automatic closing of quotes, parenthesis, brackets, etc.
 Plug 'tpope/vim-surround'		" Ändern von Sourroundings
 Plug 'tpope/vim-repeat'			" Damit können auch Plugin-Aufrufe mit dem dot-command wiederholt werden
@@ -31,6 +31,12 @@ Plug 'Shougo/unite.vim'			" Replaces AG, CtrlP,
 Plug 'Shougo/unite-outline'		" Shows Outline of file
 Plug 'Shougo/neoyank.vim'		" yank history with unity
 
+" TESTEN:
+" Plug 'mbbill/undotree'
+" Plug 'blueyed/vim-diminactive'
+Plug 'terryma/vim-multiple-cursors'		" Mit C-n das Wort unter dem Cursor markieren, mehrmals für mehrere Vorkommen
+Plug 'osyo-manga/vim-over'				" :OverCommandLine und danach suchen und ersetzen
+Plug 'sickill/vim-pasta'				" Takes care of indention, just use p and P as usual
 
 " Additional Text Objects
 Plug 'kana/vim-textobj-user'			" Eigene Textobjekte
@@ -151,8 +157,6 @@ set nowritebackup
 set noswapfile    " http://robots.thoughtbot.com/post/18739402579/global-gitignore#comment-458413287
 set ruler         " show the cursor position all the time
 set showcmd       " display incomplete commands
-set incsearch     " do incremental searching
-set hlsearch      " highlight matches
 set laststatus=2  " Always display the status line
 set autowrite     " Automatically :write before running commands
 
@@ -160,7 +164,11 @@ set autoread " detect when a file is changed
 
 
 
-
+" Searching
+set ignorecase " case insensitive searching
+set smartcase " case-sensitive if expresson contains a capital letter
+set hlsearch      " highlight matches
+set incsearch " set incremental search, like modern browsers<Paste>
 
 
 
@@ -415,7 +423,11 @@ endif
 "                     |___/           
 "-----------------------------------------------------------------------
 
+" Vim Commentary
 autocmd FileType vim setlocal commentstring=\"\ %s
+autocmd FileType gnuplot setlocal commentstring=#\ %s
+
+
 
 
 
@@ -478,6 +490,32 @@ let NERDTreeIgnore = ['\.js.map$']
 nmap <silent> <leader>k :NERDTreeToggle<cr>
 " expand to the path of the file in the current buffer
 nmap <silent> <leader>y :NERDTreeFind<cr>
+
+
+let NERDTreeHighlightCursorline=1
+
+
+function! StartUp()
+    if 0 == argc()
+        NERDTree
+    " else
+        " if argv(0) == '.'
+            " execute 'NERDTree' getcwd()
+        " else
+            " execute 'NERDTree' getcwd() . '/' . argv(0)
+        " endif
+    endif
+endfunction
+" Open NERDTree on start
+autocmd VimEnter * call StartUp()
+" give focus on buffer, not on NERDTree
+" autocmd VimEnter * wincmd p
+
+
+
+" if nerdtree is last opend buffer, quit vim
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+
 
 " default arrows
 let g:NERDTreeDirArrowExpandable = '▸'
@@ -609,6 +647,24 @@ xmap <C-k>     <Plug>(neosnippet_expand_target)
 
 
 " map <expr><TAB> neosnippet#expandable_or_jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+
+
+
+
+
+
+" Multi Cursor Selection
+
+" Default highlighting (see help :highlight and help :highlight-link)
+" highlight multiple_cursors_cursor term=reverse cterm=reverse gui=reverse
+" highlight link multiple_cursors_visual Visual
+
+
+
+" -------------------------------------------
+" Pasta Paste
+let g:pasta_disabled_filetypes = ['python', 'coffee', 'yaml']
+
 
 
 
