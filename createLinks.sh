@@ -20,11 +20,11 @@ function createLink {
 
 }
 
-createLink "$HOME/dotfiles/zsh/zshrc" "$HOME/.zshrc"
+createLink "$DOTFILESROOT/zsh/zshrc" "$HOME/.zshrc"
 
-createLink "$HOME/dotfiles/tmux/tmux.conf" "$HOME/.tmux.conf"
+createLink "$DOTFILESROOT/tmux/tmux.conf" "$HOME/.tmux.conf"
 
-createLink "$HOME/dotfiles/nvim" "$HOME/.config/nvim"
+createLink "$DOTFILESROOT/nvim" "$HOME/.config/nvim"
 
 
 
