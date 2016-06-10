@@ -466,6 +466,11 @@ hi! link diffLine Identifier
 
 
 
+" now set it up to change the status line based on mode
+" au InsertEnter * hi CursorLine term=reverse ctermbg=5 gui=undercurl guisp=Magenta
+" au InsertLeave * hi CursorLine term=reverse ctermfg=0 ctermbg=2 gui=bold,reverse
+
+
 " Widerherstellen des background
 " Ändert man mit hi Normal den Hintergrund, entscheided vim selbstständig ob
 " dark/light... so ein Quatsch. deswegen hier wieder das gewünschte einstellen
