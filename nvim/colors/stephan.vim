@@ -9,6 +9,10 @@ if exists("syntax_on")
 endif
 let colors_name = "stephan"
 
+" Background zwischenspeichern
+" vim überschreibt das in der Zeile mit "hi Normal"
+let s:background=&background
+
 "}}}
 
 
@@ -16,8 +20,8 @@ let colors_name = "stephan"
 " ---------------------------------------------------------------------
 let s:vmode       = "cterm"
 if g:solarized_termcolors == 256
-    	
-    if &background == "dark"
+		
+    " if &background == "dark"
     
 		let s:base03      = "233"	" Background Tone Dark	(default: 234)
 		let s:base02      = "235"	" Background Tone Dark - Seitenleiste (Zeilennummern) (default: 235)
@@ -41,37 +45,37 @@ if g:solarized_termcolors == 256
     
 		let s:back        = "234"
 		"let s:back        = "NONE"
-    else
+    " else
     
-    	let s:base03      = "230"	" Background Tone
-		let s:base02      = "187"	" Background Tone - Seitenleiste (Zeilennummern)
-		let s:base01      = "242"	" Content - Zeilennummern und Kommentare (default: 239)
-		let s:base00      = "246"	" Content 
+		" let s:base03      = "230"	" Background Tone
+		" let s:base02      = "187"	" Background Tone - Seitenleiste (Zeilennummern)
+		" let s:base01      = "242"	" Content - Zeilennummern und Kommentare (default: 239)
+		" let s:base00      = "246"	" Content 
 		
-		let s:base0       = "237"	" Content - Text (default: 244)
-		let s:base1       = "236"	" Content - 
-		let s:base2       = "234"	" Background Tone Light
-		let s:base3       = "232"	" Background Tone Light
+		" let s:base0       = "237"	" Content - Text (default: 244)
+		" let s:base1       = "236"	" Content - 
+		" let s:base2       = "234"	" Background Tone Light
+		" let s:base3       = "232"	" Background Tone Light
 		
-		let s:yellow      = "136"	" default: 136
-		let s:orange      = "130"	" default: 166
-		let s:red         = "88"	" default: 124
-		let s:magenta     = "125"	" default: 125
-		let s:violet      = "54"	" default: 61
-		let s:blue        = "19"	" default: 33
-		let s:cyan        = "25"	" default: 37
-		let s:green       = "28"	" default: 64
+		" let s:yellow      = "136"	" default: 136
+		" let s:orange      = "130"	" default: 166
+		" let s:red         = "88"	" default: 124
+		" let s:magenta     = "125"	" default: 125
+		" let s:violet      = "54"	" default: 61
+		" let s:blue        = "19"	" default: 33
+		" let s:cyan        = "25"	" default: 37
+		" let s:green       = "28"	" default: 64
 
 
 
-    	let s:base03      = "15"	" Background Tone
-		let s:base02      = "7"		" Background Tone - Seitenleiste (Zeilennummern)
+		" let s:base03      = "15"	" Background Tone
+		" let s:base02      = "7"		" Background Tone - Seitenleiste (Zeilennummern)
 		
 		
-		let s:back        = s:base03
+		" let s:back        = s:base03
 		"let s:back        = "NONE"
     
-    endif
+    " endif
     
 elseif g:solarized_termcolors != 256 && &t_Co >= 16
     let s:vmode       = "cterm"
@@ -209,10 +213,10 @@ exe "let s:fmt_revb     = ' ".s:vmode."=NONE".s:r.s:b.  " term=NONE".s:r.s:b."'"
 " exe compiled formats
 
 	exe "hi! Normal"         .s:fmt_none   .s:fg_base0  .s:bg_back
-
+	
 	exe "hi! Comment"        .s:fmt_ital   .s:fg_base01 .s:bg_none
 	"       *Comment         any comment
-
+	
 	exe "hi! Constant"       .s:fmt_none   .s:fg_cyan   .s:bg_none
 	"       *Constant        any constant
 	"        String          a string constant: "this is a string"
@@ -255,6 +259,8 @@ exe "let s:fmt_revb     = ' ".s:vmode."=NONE".s:r.s:b.  " term=NONE".s:r.s:b."'"
 	"        SpecialComment  special things inside a comment
 	"        Debug           debugging statements
 
+
+
 	exe "hi! Underlined"     .s:fmt_none   .s:fg_violet .s:bg_none
 	"       *Underlined      text that stands out, HTML links
 
@@ -269,10 +275,12 @@ exe "let s:fmt_revb     = ' ".s:vmode."=NONE".s:r.s:b.  " term=NONE".s:r.s:b."'"
 	"                        keywords TODO FIXME and XXX
 	"
 "}}}
+
+
 " Extended highlighting "{{{
 " ---------------------------------------------------------------------
-	exe "hi! SpecialKey" 	 .s:fmt_bold   .s:fg_base00 .s:bg_none
-	exe "hi! NonText"    	 .s:fmt_bold   .s:fg_base00 .s:bg_none
+	exe "hi! SpecialKey"	 .s:fmt_bold   .s:fg_base00 .s:bg_none
+	exe "hi! NonText"		 .s:fmt_bold   .s:fg_base00 .s:bg_none
 	exe "hi! StatusLine"     .s:fmt_none   .s:fg_base1  .s:bg_base02  .s:fmt_revr
 	exe "hi! StatusLineNC"   .s:fmt_none   .s:fg_base00 .s:bg_base02  .s:fmt_revr
 	exe "hi! Visual"         .s:fmt_none   .s:fg_base01 .s:bg_base03  .s:fmt_revr
@@ -438,7 +446,34 @@ hi! link diffLine Identifier
 	exe "hi! texRefLabel"    . s:fg_yellow .s:bg_back   .s:fmt_none
 "}}}
 
+
+
+
 " CtrlP highlighting "{{{
 " ---------------------------------------------------------------------
 	exe "hi! CtrlPLinePre term=NONE cterm=NONE ctermbg=NONE ctermfg=136"
 "}}}
+" CtrlP highlighting "{{{
+" ---------------------------------------------------------------------
+	exe "hi! IndentGuidesOdd  ctermbg=238"
+	exe "hi! IndentGuidesEven ctermbg=236"
+"}}}
+
+
+	exe "hi! TagListTitle cterm=NONE ".s:fg_red
+
+
+
+
+
+" Widerherstellen des background
+" Ändert man mit hi Normal den Hintergrund, entscheided vim selbstständig ob
+" dark/light... so ein Quatsch. deswegen hier wieder das gewünschte einstellen
+exe "set background=".s:background
+
+
+
+
+
+
+
