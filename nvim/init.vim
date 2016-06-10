@@ -103,6 +103,9 @@ Plug 'terryma/vim-expand-region'		" expand visual selection with +
 
 Plug 'vim-scripts/taglist.vim'			" Source code browser
 
+Plug 'airblade/vim-gitgutter'			" show changes of git-tracked files in sign-column
+" Plug 'mhinz/vim-signify'
+
 
 
 " Add plugins to &runtimepath
@@ -174,6 +177,8 @@ set autowrite     " Automatically :write before running commands
 
 set autoread " detect when a file is changed
 
+
+set updatetime=500		" ms. default: 4000ms. important for gitgutter to automatically show changes in sign-color
 
 
 " Searching
