@@ -26,17 +26,6 @@ map  n <Plug>(easymotion-next)
 map  N <Plug>(easymotion-prev)
 
 
-
-let g:neomake_splint_maker = {
-		\ 'exe': 'splint',
-		\ 'args': ['%:p'],
-		\ }
-
-
-
-
-
-
 " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
 " let g:UltiSnipsExpandTrigger="<tab>"
 " let g:UltiSnipsJumpForwardTrigger="<c-b>"
@@ -123,12 +112,6 @@ let g:NERDTreeIndicatorMapCustom = {
 " plugged/ctrlp.vim/autoload/ctrlp.vim (exe "hi CtrlPLinePre ...")
 "
 " -------------------------------------------
-" nmap <silent> <leader>t :CtrlP<cr>
-
-nmap <silent> <leader><C-b> :CtrlPBuffer<cr>
-
-
-
 
 let g:ctrlp_line_prefix = '⚪ '
 " let g:ctrlp_line_prefix = '➤ '
@@ -144,11 +127,11 @@ let g:ctrlp_custom_ignore = {
 
 
 " Use a leader instead of the actual named binding
-nmap <leader>p :CtrlP<cr>
+nmap <leader>pp :CtrlP<cr>
 
 " Easy bindings for its various modes
-nmap <leader>bb :CtrlPBuffer<cr>
-nmap <leader>bs :CtrlPMRU<cr>
+nmap <leader>pb :CtrlPBuffer<cr>
+nmap <leader>ps :CtrlPMRU<cr>
 
 let g:ctrlp_dotfiles=1
 let g:ctrlp_working_path_mode = 'ra'
@@ -258,8 +241,70 @@ let g:pasta_disabled_filetypes = ['python', 'coffee', 'yaml']
 
 
 
+" -------------------------------------------
+"  Indention Guide Lines 
+"  https://github.com/nathanaelkane/vim-indent-guides
+" Startet erst ab der 2. Einrückungstiefe
+let g:indent_guides_start_level = 2
+" Breite des Streifens
+let g:indent_guides_guide_size = 1
+" Farben selbst setzen
+let g:indent_guides_auto_colors = 0
 
 
+
+
+
+
+" ------------------------------------------
+"  expand visual Selection
+
+" Default settings. (NOTE: Remove comments in dictionary before sourcing)
+let g:expand_region_text_objects = {
+      \ 'iw'  :0,
+      \ 'iW'  :0,
+      \ 'i"'  :1,
+      \ 'i''' :1,
+      \ 'i]'  :1,
+      \ 'ib'  :1,
+      \ 'iB'  :1,
+      \ 'il'  :1,
+      \ 'ip'  :1,
+      \ 'ie'  :1,
+      \ 'ae'  :1,
+      \ }
+
+
+
+
+" -------------------------------------------
+"  Taglist
+"
+
+" Close if last window
+let Tlist_Exit_OnlyWindow = 1
+" show on right side
+let Tlist_Use_Right_Window = 1
+" Click on with single click, jumps to buffer line
+let Tlist_Use_SingleClick = 1
+" Show only tags from current buffer
+let Tlist_Show_One_File = 1
+
+nmap <leader>t :TlistToggle<cr>
+
+
+
+
+
+
+
+
+" Was ist damit? TODO
+
+let g:neomake_splint_maker = {
+		\ 'exe': 'splint',
+		\ 'args': ['%:p'],
+		\ }
 
 
 

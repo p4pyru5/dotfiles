@@ -33,13 +33,6 @@ Plug 'Shougo/unite.vim'			" Replaces AG, CtrlP,
 Plug 'Shougo/unite-outline'		" Shows Outline of file
 Plug 'Shougo/neoyank.vim'		" yank history with unity
 
-" TESTEN:
-" Plug 'mbbill/undotree'
-" Plug 'blueyed/vim-diminactive'
-Plug 'terryma/vim-multiple-cursors'		" Mit C-n das Wort unter dem Cursor markieren, mehrmals für mehrere Vorkommen
-Plug 'osyo-manga/vim-over'				" :OverCommandLine und danach suchen und ersetzen
-Plug 'sickill/vim-pasta'				" Takes care of indention, just use p and P as usual
-
 
 
 " Additional Text Objects
@@ -52,6 +45,9 @@ Plug 'Julian/vim-textobj-brace'			" ij/aj					between next braces
 Plug 'vim-scripts/argtextobj.vim'		" ia/aa					for function arguments
 "Plug 'kana/vim-textobj-function'		" if/af, iF/aF
 Plug 'kana/vim-textobj-indent'			" ii/ai, iI/aI
+
+Plug 'vim-scripts/camelcasemotion'		" 
+
 
 " ab hier... naja mal schauen
 Plug 'libclang-vim/libclang-vim'				" dependency for 
@@ -82,19 +78,31 @@ function! DoRemote(arg)
 endfunction
 Plug 'Shougo/deoplete.nvim', { 'do': function('DoRemote') }
 Plug 'Shougo/neco-syntax'	" Use syntax file for completion
+" Plug 'Shougo/neocomplete.vim'
 
 Plug 'Shougo/neosnippet'	" Snippets
 Plug 'Shougo/neosnippet-snippets'
 
 
-" Plug 'Shougo/neocomplete.vim'
-
 "Plug 'sirver/ultisnips'
-
 "Plug 'honza/vim-snippets'
 
-
 Plug 'justmao945/vim-clang'
+
+
+
+
+" TESTEN:
+" Plug 'mbbill/undotree'
+" Plug 'blueyed/vim-diminactive'
+Plug 'terryma/vim-multiple-cursors'		" Mit C-n das Wort unter dem Cursor markieren, mehrmals für mehrere Vorkommen
+Plug 'osyo-manga/vim-over'				" :OverCommandLine und danach suchen und ersetzen
+Plug 'sickill/vim-pasta'				" Takes care of indention, just use p and P as usual
+Plug 'nathanaelkane/vim-indent-guides'	" Show helper lines for indention
+Plug 'terryma/vim-expand-region'		" expand visual selection with +
+
+Plug 'vim-scripts/taglist.vim'			" Source code browser
+
 
 
 " Add plugins to &runtimepath
@@ -213,11 +221,14 @@ let base16colorspace=256  " Access colors present in 256 colorspace"
 execute "set background=".BACKGROUND
 
 
-"colorscheme solarized
+" colorscheme solarized
 colorscheme stephan
 "colorscheme Tomorrow-Night-Eighties
 "colorscheme Tomorrow
 
+" execute "set background=".BACKGROUND
+
+" colorscheme stephan
 
 
 
@@ -433,8 +444,28 @@ endif
 
 
 
-if filereadable(expand("~/.config/nvim/plugins.vim"))
-	source ~/.config/nvim/plugins.vim
+if filereadable(expand("~/.config/nvim/init.plugins.vim"))
+	source ~/.config/nvim/init.plugins.vim
 endif
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
