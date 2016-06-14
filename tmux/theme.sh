@@ -49,6 +49,14 @@ set-window-option -g window-status-current-fg $tm_color_active
 set-window-option -g window-status-current-bg default
 set-window-option -g  window-status-current-format "#[bold]#I #W"
 
+
+
+set-window-option -g window-status-activity-attr none
+set-window-option -g window-status-activity-bg $tm_background
+set-window-option -g window-status-activity-fg $tm_color_host
+
+
+
 # pane border
 set-option -g pane-border-fg $tm_color_inactive
 set-option -g pane-active-border-fg $tm_active_border_color
