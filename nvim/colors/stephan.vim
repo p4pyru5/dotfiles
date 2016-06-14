@@ -21,10 +21,10 @@ let s:background=&background
 let s:vmode       = "cterm"
 if g:solarized_termcolors == 256
 		
-    " if &background == "dark"
+    if &background == "dark"
     
-		let s:base03      = "233"	" Background Tone Dark	(default: 234)
-		let s:base02      = "235"	" Background Tone Dark - Seitenleiste (Zeilennummern) (default: 235)
+		let s:base03      = "234"	" Background Tone Dark	(default: 234)
+		let s:base02      = "236"	" Background Tone Dark - Seitenleiste (Zeilennummern) (default: 235)
 		
 		let s:base01      = "243"	" Content - Zeilennummern und Kommentare (default: 239)
 		let s:base00      = "245"	" Content - (default: 240)
@@ -43,39 +43,38 @@ if g:solarized_termcolors == 256
 		let s:cyan        = "37"	" default: 37
 		let s:green       = "71"	" default: 64
     
-		let s:back        = "234"
+		let s:back        = s:base03
 		"let s:back        = "NONE"
-    " else
+    else
     
-		" let s:base03      = "230"	" Background Tone
-		" let s:base02      = "187"	" Background Tone - Seitenleiste (Zeilennummern)
-		" let s:base01      = "242"	" Content - Zeilennummern und Kommentare (default: 239)
-		" let s:base00      = "246"	" Content 
+		let s:base03      = "230"	" Background Tone
+		let s:base02      = "187"	" Background Tone - Seitenleiste (Zeilennummern)
+		let s:base01      = "242"	" Content - Zeilennummern und Kommentare (default: 239)
+		let s:base00      = "248"	" Content 
 		
-		" let s:base0       = "237"	" Content - Text (default: 244)
-		" let s:base1       = "236"	" Content - 
-		" let s:base2       = "234"	" Background Tone Light
-		" let s:base3       = "232"	" Background Tone Light
+		let s:base0       = "237"	" Content - Text (default: 244)
+		let s:base1       = "236"	" Content - 
+		let s:base2       = "234"	" Background Tone Light
+		let s:base3       = "232"	" Background Tone Light
 		
-		" let s:yellow      = "136"	" default: 136
-		" let s:orange      = "130"	" default: 166
-		" let s:red         = "88"	" default: 124
-		" let s:magenta     = "125"	" default: 125
-		" let s:violet      = "54"	" default: 61
-		" let s:blue        = "19"	" default: 33
-		" let s:cyan        = "25"	" default: 37
-		" let s:green       = "28"	" default: 64
+		let s:yellow      = "136"	" default: 136
+		let s:orange      = "130"	" default: 166
+		let s:red         = "88"	" default: 124
+		let s:magenta     = "125"	" default: 125
+		let s:violet      = "54"	" default: 61
+		let s:blue        = "19"	" default: 33
+		let s:cyan        = "25"	" default: 37
+		let s:green       = "28"	" default: 64
 
 
-
-		" let s:base03      = "15"	" Background Tone
-		" let s:base02      = "7"		" Background Tone - Seitenleiste (Zeilennummern)
+		let s:base03      = "15"	" Background Tone
+		let s:base02      = "7"		" Background Tone - Seitenleiste (Zeilennummern)
 		
 		
-		" let s:back        = s:base03
+		let s:back        = s:base03
 		"let s:back        = "NONE"
     
-    " endif
+    endif
     
 elseif g:solarized_termcolors != 256 && &t_Co >= 16
     let s:vmode       = "cterm"
@@ -275,7 +274,7 @@ exe "let s:fmt_revb     = ' ".s:vmode."=NONE".s:r.s:b.  " term=NONE".s:r.s:b."'"
 	"                        keywords TODO FIXME and XXX
 	"
 "}}}
-
+                          
 
 " Extended highlighting "{{{
 " ---------------------------------------------------------------------
@@ -316,17 +315,17 @@ exe "let s:fmt_revb     = ' ".s:vmode."=NONE".s:r.s:b.  " term=NONE".s:r.s:b."'"
 	exe "hi! TabLineFill"    .s:fmt_undr   .s:fg_base0  .s:bg_base02
 	exe "hi! TabLineSel"     .s:fmt_undr   .s:fg_base01 .s:bg_base2
 	exe "hi! CursorColumn"   .s:fmt_none   .s:fg_none   .s:bg_base02
-	" exe "hi! CursorLine"     .s:fmt_uopt   .s:fg_none   .s:bg_base02
-	" exe "hi! ColorColumn"    .s:fmt_none   .s:fg_none   .s:bg_base02
-	" exe "hi! LineNr"         .s:fmt_none   .s:fg_base01 .s:bg_base02
-	" exe "hi! CursorLineNr"   .s:fmt_bold   .s:fg_base2  .s:bg_base02
-	" exe "hi! Cursor"         .s:fmt_none   .s:fg_base03 .s:bg_base0
 
-	exe "hi! CursorLine"     .s:fmt_uopt   .s:fg_none   ." ctermbg=236"
+	exe "hi! CursorLine"     .s:fmt_uopt   .s:fg_none   .s:bg_base02
 	exe "hi! ColorColumn"    .s:fmt_none   .s:fg_none   .s:bg_base02
 	exe "hi! LineNr"         .s:fmt_none   .s:fg_base01 .s:bg_base02
-	exe "hi! CursorLineNr"   .s:fmt_none   .s:fg_base2  ." ctermbg=238"
 	exe "hi! Cursor"         .s:fmt_none   .s:fg_base03 .s:bg_base0
+
+	exe "hi! CursorLineNr"   .s:fmt_none   .s:fg_base2  .s:bg_base03
+	" now set it up to change the status line based on mode
+	au InsertEnter * exe "hi CursorLineNr"     . s:bg_green
+	au InsertLeave * exe "hi CursorLineNr"     . s:bg_base03
+
 
 	hi! link lCursor Cursor
 	exe "hi! MatchParen"     .s:fmt_bold   .s:fg_red    .s:bg_base01
@@ -355,7 +354,7 @@ exe "let s:fmt_revb     = ' ".s:vmode."=NONE".s:r.s:b.  " term=NONE".s:r.s:b."'"
 	exe "hi! helpVim"           .s:fmt_none    .s:fg_magenta.s:bg_none
 	exe "hi! helpHyperTextJump" .s:fmt_undr    .s:fg_blue   .s:bg_none
 	exe "hi! helpHyperTextEntry".s:fmt_none    .s:fg_green  .s:bg_none
-	exe "hi! vimIsCommand"      .s:fmt_none    .s:fg_base00 .s:bg_none
+	exe "hi! vimIsCommand"      .s:fmt_none    .s:fg_magenta .s:bg_none
 	exe "hi! vimSynMtchOpt"     .s:fmt_none    .s:fg_yellow .s:bg_none
 	exe "hi! vimSynType"        .s:fmt_none    .s:fg_cyan   .s:bg_none
 	exe "hi! vimHiLink"         .s:fmt_none    .s:fg_blue   .s:bg_none
@@ -466,9 +465,7 @@ hi! link diffLine Identifier
 
 
 
-" now set it up to change the status line based on mode
-" au InsertEnter * hi CursorLine term=reverse ctermbg=5 gui=undercurl guisp=Magenta
-" au InsertLeave * hi CursorLine term=reverse ctermfg=0 ctermbg=2 gui=bold,reverse
+
 
 
 " Widerherstellen des background

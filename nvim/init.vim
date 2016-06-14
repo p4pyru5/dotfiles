@@ -7,7 +7,7 @@ call plug#begin('~/.config/nvim/plugged')
 " Make sure you use single quotes
 
 " colorschemes
-" Plug 'chriskempson/base16-vim'
+Plug 'chriskempson/base16-vim'
 
 Plug 'vim-airline/vim-airline' " fancy statusline
 Plug 'vim-airline/vim-airline-themes' " themes for vim-airline
@@ -63,7 +63,8 @@ Plug 'benmills/vimux'
 
 
 Plug 'lervag/vimtex'
-
+" not needed, vimtex provides close command of environments with ]] in insert
+" mode Plug 'gi1242/vim-tex-autoclose'		" close last opend tex environment
 
 Plug 'neomake/neomake'		" Syntax-Checker, asynchron mit neovim
 
@@ -248,11 +249,14 @@ let g:airline_symbols.space = "\ua0"
 let g:airline_theme='solarized'
 let g:airline_solarized_bg=BACKGROUND
 
-"let g:airline_theme='murmur'
-"let g:airline_murmur_bg=BACKGROUND
+" let g:airline_theme = 'base16'
 
-"let g:airline_theme='tomorrow'
-"let g:airline_tomorrow_bg=BACKGROUND
+
+" let g:airline_theme='murmur'
+" let g:airline_murmur_bg=BACKGROUND
+
+" let g:airline_theme='tomorrow'
+" let g:airline_tomorrow_bg=BACKGROUND
 
 
 " smart tab bar
@@ -385,7 +389,8 @@ set splitright
 " nnoremap <tab> %
 " vnoremap <tab> %
 
-
+noremap <silent> <C-w><Left> :bprevious<CR>
+noremap <silent> <C-w><Right> :bnext<CR>
 
 
 "Map Ctrl + S to save in any mode
@@ -461,12 +466,14 @@ endif
 
 
 
+" let g:gitgutter_override_sign_column_highlight = 0
 
 
 
 
-
-
+" Create file under cursor
+" map <silent> <leader>cf :call writefile([], expand("<cfile>"), "t")<cr>
+map <leader>cf :call writefile([], expand("<cfile>"), "t")<cr>
 
 
 
