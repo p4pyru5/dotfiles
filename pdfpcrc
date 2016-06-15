@@ -2,7 +2,21 @@
 
 
 
+# Bindings for Logitech R400 Presenter
+#
+# PrevSlide : PageDown
+# NextSlide : PageUp
+# Blank Screen: b
+# Play-Key sends alternating Shift+F5 and Escape
 
+# Escape is bind to quit by default
+unbind Escape
+# need new binding for quit
+bind q quit
+
+# Play-Key is bind to jump to first/last slide
+bind S+F5 gotoFirst
+bind Escape gotoLast
 
 
 
