@@ -1,5 +1,7 @@
 # Path to your oh-my-zsh installation.
-  export ZSH=/usr/local/share/oh-my-zsh
+export ZSH=/usr/local/share/oh-my-zsh
+
+export ZSH_CACHE_DIR="~/.zsh_cache"
 
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
@@ -51,7 +53,7 @@ COMPLETION_WAITING_DOTS="true"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git git-flow zsh-syntax-highlighting)
+plugins=(git git-flow svn-fast-info zsh-syntax-highlighting)
 
 # User configuration
 
@@ -63,6 +65,9 @@ if [ -d "$HOME/bin" ] ; then
     PATH="$HOME/bin:$PATH"
 fi
 
+if [ -d "$HOME/MATLAB/R2014b/bin" ] ; then
+	PATH="$HOME/MATLAB/R2014b/bin:$PATH"
+fi
 
 export XDG_CONFIG_HOME=$HOME/.config
 
@@ -98,6 +103,9 @@ export LC_ALL="de_DE.UTF-8"
 
 alias y2o="youtube2ogg"
 alias y2m="youtube2mp3"
+
+alias llo="ls -l | awk '{k=0;for(i=0;i<=8;i++)k+=((substr(\$1,i+2,1)~/[rwx]/)*2^(8-i));if(k)printf(\"%0o \",k);print}'"
+
 
 export TERM=xterm-256color
 #export TERM=screen-256color
