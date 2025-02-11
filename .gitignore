@@ -1,5 +1,6 @@
 vim/bundle/
 tmux/network_*.last
+tmux/plugins/tpm
 vim/undo/
 nvim/plugged/
 nvim/.init.vim-rplugin*

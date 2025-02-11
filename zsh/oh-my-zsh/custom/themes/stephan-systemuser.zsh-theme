@@ -1,7 +1,4 @@
 
-
-
-
 # angepasstes Theme von hier
 # http://stevelosh.com/blog/2010/02/my-extravagant-zsh-prompt/
 
@@ -44,20 +41,12 @@ function box_name {
 
 
 
-
-#~ PROMPT='%{$fg_bold[blue]%}%n%{$reset_color%} at %{$fg_bold[cyan]%}$(box_name)%{$reset_color%} in %{$fg_bold[green]%}${PWD/#$HOME/~}%{$reset_color%}$(hg_prompt_info)$(git_prompt_info)
-#~ $(virtualenv_info)%(?,,%{${fg_bold[white]}%}[%?]%{$reset_color%} )%{$fg_bold[blue]%}$(prompt_char)%{$reset_color%} '
-
-
-PROMPT='%{$fg_bold[blue]%}%n%{$reset_color%} at %{$fg_bold[cyan]%}$(box_name)%{$reset_color%} in %{$fg_bold[green]%}%(5~|%-1~/…/%3~|%4~)%{$reset_color%}$(hg_prompt_info)$(git_prompt_info)$(svn_prompt_info)
+PROMPT='%{$fg_bold[red]%}❖ %n%{$reset_color%} at %{$fg_bold[cyan]%}$(box_name)%{$reset_color%} in %{$fg_bold[green]%}%~%{$reset_color%}$(hg_prompt_info)$(git_prompt_info)$(svn_prompt_info)
 $(virtualenv_info)%(?,,%{${fg_bold[white]}%}[%?]%{$reset_color%} )%{$fg_bold[blue]%}$(prompt_char)%{$reset_color%}'
 
 
-#~ local ret_status="%(?:%{$fg_bold[green]%}➜ :%{$fg_bold[red]%}➜ %s)"
 local return_status="%{$fg[red]%}%(?..✘)%{$reset_color%}"
 RPROMPT='${return_status}%{$reset_color%}'
-
-#~ RPROMPT='$(battery_charge)'
 
 
 # ----------------------------------------------------------------------------
@@ -75,9 +64,6 @@ ZSH_THEME_GIT_PROMPT_DELETED="%{$fg_bold[red]%}-"
 ZSH_THEME_GIT_PROMPT_RENAMED="%{$fg_bold[magenta]%}>"
 ZSH_THEME_GIT_PROMPT_UNMERGED="%{$fg_bold[yellow]%}#"
 
-
-#~ ZSH_THEME_GIT_PROMPT_SHA_BEFORE=" %{$fg_bold[white]%}[%{$fg_bold[blue]%}"
-#~ ZSH_THEME_GIT_PROMPT_SHA_AFTER="%{$fg_bold[white]%}]"
 
 
 
