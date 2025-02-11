@@ -2,22 +2,19 @@
 
 SESSION=main
 
-# if the session is already running, just attach to it.
-tmux has-session -t $SESSION
-if [ $? -eq 0 ]; then
-       echo "Session $SESSION already exists. Attaching."
-       sleep 1
-       tmux attach -t $SESSION
-       exit 0;
+# Prüfen, ob die Session "Main" existiert
+if tmux has-session -t "$SESSION" 2>/dev/null; then
+   echo "tmux-session '$SESSION' already running - attaching..."
+   sleep 1
+   tmux attach-session -t "$SESSION"
+   exit 0;
+else
+   #echo "tmux-session '$SESSION' existiert nicht. Erstelle und verbinde..."
+    # create a new session, named $SESSION, and detach from it
+    tmux new-session   -d -s $SESSION
+    #tmux new-window       -t $SESSION:1
+    #tmux split-window  -v -t $SESSION:1
+    #tmux select-window    -t $SESSION:0
+
+    tmux attach -t $SESSION
 fi
-
-
-# create a new session, named $SESSION, and detach from it
-tmux new-session   -d -s $SESSION
-tmux new-window       -t $SESSION:0
-tmux split-window  -v -t $SESSION:1
-tmux select-window    -t $SESSION:0
-
-tmux attach -t $SESSION
-
-
