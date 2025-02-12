@@ -3,7 +3,7 @@
 # Kategorien und Pakete definieren
 CATEGORIES_ORDER=("Basics" "Monitoring" "Security" "Backup" "Networking" "Utilities")
 declare -A CATEGORIES=(
-    ["Basics"]="wget curl git"
+    ["Basics"]="wget curl git gnupg2"
     ["Monitoring"]="htop iftop iotop sysstat"
     ["Security"]="nftables fail2ban"
     ["Backup"]="rsync borgbackup"
